@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 from . import utils
+from .managers import ActiveLinkManager
 
 # Create your models here.
 
@@ -15,6 +16,8 @@ class Link(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     create_date = models.DateTimeField()
     active = models.BooleanField(default=True)
+    objects = models.Manager()
+    public = ActiveLinkManager()
 
     def __str__(self):
         return f"{self.identifier}"
